@@ -1,20 +1,13 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container">
-      <a class="navbar-brand" href="/">Crawliday</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </nav>
+  <b-navbar toggleable="xl" type="dark" variant="dark">
+    <b-container>
+      <b-navbar-brand href="#">Crawliday</b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <!-- <b-collapse id="nav-collapse" is-nav></b-collapse> -->
+    </b-container>
+  </b-navbar>
 </template>
 
 <script>
