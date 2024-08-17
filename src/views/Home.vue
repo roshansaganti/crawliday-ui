@@ -29,9 +29,12 @@
             <p class="lead">Subscribe to the Halloween Calendar.</p>
 
             <p class="lead">
-              <b-button variant="danger">
-                <b-icon-calendar2-plus></b-icon-calendar2-plus>
-                &nbsp;&nbsp; Subscribe
+              <b-button
+                variant="danger"
+                href="webcal://calendar.google.com/calendar/ical/67527d508ed63b7e7362a0ea43a2d28a8ffc4983ecf413e7c7f302306694f4bd%40group.calendar.google.com/public/basic.ics"
+              >
+                Subscribe &nbsp;
+                <b-icon-cloud-arrow-down></b-icon-cloud-arrow-down>
               </b-button>
             </p>
           </div>
@@ -41,9 +44,12 @@
             <p class="lead">Subscribe to the Christmas Calendar.</p>
 
             <p class="lead">
-              <b-button variant="success">
-                <b-icon-calendar2-plus></b-icon-calendar2-plus>
-                &nbsp;&nbsp; Subscribe
+              <b-button
+                variant="success"
+                href="webcal://calendar.google.com/calendar/ical/2d5df6a2e30dbbc33b1e2255ba834e4c81080c0ae495d39a44a35f6eed2d79aa%40group.calendar.google.com/public/basic.ics"
+              >
+                Subscribe &nbsp;
+                <b-icon-cloud-arrow-down></b-icon-cloud-arrow-down>
               </b-button>
             </p>
           </div>
