@@ -1,9 +1,13 @@
 <template>
   <div class="footer">
     <footer class="pt-5 pb-3 text-center">
-      <a href="https://github.com/roshansaganti/crawliday" target="_blank">
+      <b-button
+        href="https://github.com/roshansaganti/crawliday"
+        target="_blank"
+        variant="outline-dark"
+      >
         <b-icon-github></b-icon-github>
-      </a>
+      </b-button>
       <br /><br />
       <div class="text-muted small">
         &copy; Roshan Saganti. All Rights Reserved. 2024.
