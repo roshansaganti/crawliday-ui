@@ -15,10 +15,10 @@ jobs:
 
     steps:
       - name: "Checkout source code"
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v2"
         with:
           ref: ${{ github.ref }}
-      - name: "Read package.json"
+      - name: "cat package.json"
         run: cat ./package.json
       - name: "Automated Version Bump"
         id: version-bump
@@ -29,7 +29,7 @@ jobs:
           major-wording: "major"
           minor-wording: "minor"
           patch-wording: "patch"
-      - name: "Read package.json"
+      - name: "cat package.json"
         run: cat ./package.json
       - name: "Output Step"
         env:
