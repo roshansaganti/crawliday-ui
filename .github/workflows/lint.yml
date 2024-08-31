@@ -1,0 +1,27 @@
+name: lint
+
+on:
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  lint:
+    name: "Lint"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout source code"
+        uses: actions/checkout@v4
+      - name: "Install Node.JS"
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: "Clean Install Node Modules"
+        run: npm ci
+      - name: "Lint"
+        uses: sibiraj-s/action-eslint@v3
+        with:
+          eslint-args: "--ignore-path=.gitignore --quiet"
+          extensions: "js,jsx,ts,tsx"
+          annotations: true
