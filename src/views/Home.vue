@@ -41,7 +41,7 @@
             <p class="lead">Subscribe to the Christmas Calendar.</p>
 
             <p class="lead">
-              <b-button variant="success" :href="christmasCalendarID">
+              <b-button variant="success" :href="christmasCalendarID" disabled>
                 Subscribe &nbsp;
                 <b-icon-cloud-arrow-down></b-icon-cloud-arrow-down>
               </b-button>
