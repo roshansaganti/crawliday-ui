@@ -26,26 +26,33 @@
       <b-row class="pb-5">
         <b-col>
           <div class="text-center">
-            <p class="lead">Subscribe to the Halloween Calendar.</p>
+            <p class="lead">Subscribe to the Halloween Calendar</p>
 
             <p class="lead">
-              <b-button variant="danger" :href="halloweenCalendarID">
-                Subscribe &nbsp;
-                <b-icon-cloud-arrow-down></b-icon-cloud-arrow-down>
+              <b-button variant="none" :href="halloweenCalendarID">
+                <h3>
+                  <font-awesome-icon :icon="['fab', 'apple']" size="lg" />
+                </h3>
               </b-button>
+              <!-- <b-button variant="none" :href="halloweenCalendarID">
+                <h5><font-awesome-icon :icon="['fab', 'google']" size="lg" /></h5>
+              </b-button> -->
             </p>
           </div>
         </b-col>
         <b-col>
           <div class="text-center">
-            <p class="lead">Subscribe to the Christmas Calendar.</p>
+            <p class="lead">Subscribe to the Christmas Calendar</p>
 
-            <p class="lead">
-              <b-button variant="success" :href="christmasCalendarID" disabled>
-                Subscribe &nbsp;
-                <b-icon-cloud-arrow-down></b-icon-cloud-arrow-down>
+            <h5>Coming Soon!</h5>
+            <!-- <p class="lead">
+              <b-button variant="none" :href="halloweenCalendarID">
+                <h3><font-awesome-icon :icon="['fab', 'apple']" /></h3>
               </b-button>
-            </p>
+              <b-button variant="none" :href="halloweenCalendarID">
+                <h5><font-awesome-icon :icon="['fab', 'google']" /></h5>
+              </b-button>
+            </p> -->
           </div>
         </b-col>
       </b-row>
