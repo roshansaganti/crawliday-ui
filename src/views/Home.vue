@@ -49,6 +49,31 @@
           </div>
         </b-col>
       </b-row>
+
+      <b-card no-body>
+        <b-tabs card>
+          <b-tab title="Halloween" active>
+            <iframe
+              :src="halloweenCalendarEmbed"
+              style="border: 0"
+              width="100%"
+              height="800"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+          </b-tab>
+          <b-tab title="Christmas" disabled>
+            <iframe
+              :src="christmasCalendarEmbed"
+              style="border: 0"
+              width="100%"
+              height="800"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+          </b-tab>
+        </b-tabs>
+      </b-card>
     </b-container>
 
     <Footer></Footer>
@@ -70,6 +95,8 @@ export default {
     return {
       halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
       christmasCalendarID: process.env.VUE_APP_CHRISTMAS_ICAL,
+      halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
+      christmasCalendarEmbed: process.env.VUE_APP_CHRISTMAS_EMBED,
     };
   },
 };
