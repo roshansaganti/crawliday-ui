@@ -4,9 +4,9 @@
       <b-button
         href="https://github.com/roshansaganti/crawliday"
         target="_blank"
-        variant="outline-dark"
+        variant="none"
       >
-        <b-icon-github></b-icon-github>
+        <font-awesome-icon :icon="['fab', 'github']" size="xl" />
       </b-button>
       <br /><br />
       <div class="text-muted small">
