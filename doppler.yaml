@@ -1,0 +1,3 @@
+setup:
+  - project: crawliday-ui
+    config: dev
