@@ -35,7 +35,9 @@
                 </h3>
               </b-button>
               <!-- <b-button variant="none" :href="halloweenCalendarID">
-                <h5><font-awesome-icon :icon="['fab', 'google']" size="lg" /></h5>
+                <h5>
+                  <font-awesome-icon :icon="['fab', 'google']" size="lg" />
+                </h5>
               </b-button> -->
             </p>
           </div>
@@ -44,22 +46,26 @@
           <div class="text-center">
             <p class="lead">Subscribe to the Christmas Calendar</p>
 
-            <h5>Coming Soon!</h5>
-            <!-- <p class="lead">
-              <b-button variant="none" :href="halloweenCalendarID">
-                <h3><font-awesome-icon :icon="['fab', 'apple']" /></h3>
-              </b-button>
-              <b-button variant="none" :href="halloweenCalendarID">
-                <h5><font-awesome-icon :icon="['fab', 'google']" /></h5>
-              </b-button>
-            </p> -->
+            <!-- <h5>Coming Soon!</h5> -->
+              <p class="lead">
+                <b-button variant="none" :href="christmasCalendarID">
+                  <h3>
+                    <font-awesome-icon :icon="['fab', 'apple']" size="lg" />
+                  </h3>
+                </b-button>
+                <!-- <b-button variant="none" :href="christmasCalendarID">
+                  <h5>
+                    <font-awesome-icon :icon="['fab', 'google']" size="lg" />
+                  </h5>
+                </b-button> -->
+              </p>
           </div>
         </b-col>
       </b-row>
 
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Halloween" active>
+          <b-tab title="Halloween">
             <iframe
               :src="halloweenCalendarEmbed"
               style="border: 0"
@@ -69,7 +75,7 @@
               scrolling="no"
             ></iframe>
           </b-tab>
-          <b-tab title="Christmas" disabled>
+          <b-tab title="Christmas" active>
             <iframe
               :src="christmasCalendarEmbed"
               style="border: 0"
