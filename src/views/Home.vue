@@ -68,6 +68,7 @@
           <b-tab title="Halloween">
             <iframe
               :src="halloweenCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
               style="border: 0"
               width="100%"
               height="800"
@@ -78,6 +79,7 @@
           <b-tab title="Christmas" active>
             <iframe
               :src="christmasCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
               style="border: 0"
               width="100%"
               height="800"
@@ -112,5 +114,16 @@ export default {
       christmasCalendarEmbed: process.env.VUE_APP_CHRISTMAS_EMBED,
     };
   },
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
+  },
 };
 </script>
+
+<style scoped>
+.calendar-embed--dark {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.9) contrast(0.95);
+}
+</style>
