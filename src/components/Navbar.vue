@@ -41,13 +41,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.navbar-dark .theme-toggle {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.navbar-light .theme-toggle {
-  color: rgba(0, 0, 0, 0.9);
-}
-</style>

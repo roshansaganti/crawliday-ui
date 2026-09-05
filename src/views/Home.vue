@@ -121,9 +121,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.calendar-embed--dark {
-  filter: invert(0.92) hue-rotate(180deg) saturate(0.9) contrast(0.95);
-}
-</style>
