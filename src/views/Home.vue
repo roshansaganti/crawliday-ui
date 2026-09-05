@@ -31,12 +31,12 @@
             <p class="lead">
               <b-button variant="none" :href="halloweenCalendarID">
                 <h3>
-                  <font-awesome-icon :icon="['fab', 'apple']" size="lg" />
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
                 </h3>
               </b-button>
               <!-- <b-button variant="none" :href="halloweenCalendarID">
                 <h5>
-                  <font-awesome-icon :icon="['fab', 'google']" size="lg" />
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
                 </h5>
               </b-button> -->
             </p>
@@ -50,12 +50,12 @@
               <p class="lead">
                 <b-button variant="none" :href="christmasCalendarID">
                   <h3>
-                    <font-awesome-icon :icon="['fab', 'apple']" size="lg" />
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
                   </h3>
                 </b-button>
                 <!-- <b-button variant="none" :href="christmasCalendarID">
                   <h5>
-                    <font-awesome-icon :icon="['fab', 'google']" size="lg" />
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
                   </h5>
                 </b-button> -->
               </p>
@@ -68,6 +68,7 @@
           <b-tab title="Halloween">
             <iframe
               :src="halloweenCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
               style="border: 0"
               width="100%"
               height="800"
@@ -78,6 +79,7 @@
           <b-tab title="Christmas" active>
             <iframe
               :src="christmasCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
               style="border: 0"
               width="100%"
               height="800"
@@ -111,6 +113,11 @@ export default {
       halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
       christmasCalendarEmbed: process.env.VUE_APP_CHRISTMAS_EMBED,
     };
+  },
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
   },
 };
 </script>

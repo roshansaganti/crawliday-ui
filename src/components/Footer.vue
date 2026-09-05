@@ -6,7 +6,7 @@
         target="_blank"
         variant="none"
       >
-        <font-awesome-icon :icon="['fab', 'github']" size="xl" />
+        <font-awesome-icon class="theme-icon" :icon="['fab', 'github']" size="xl" />
       </b-button>
       <br /><br />
       <div class="text-muted small">

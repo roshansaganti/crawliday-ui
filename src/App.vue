@@ -1,7 +1,15 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'theme-dark': isDarkMode }">
     <router-view />
   </div>
 </template>
 
-<style></style>
+<script>
+export default {
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
+  },
+};
+</script>
