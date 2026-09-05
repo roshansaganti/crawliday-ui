@@ -9,7 +9,7 @@
 
       <b-navbar-nav class="ml-auto">
         <a
-          class="btn"
+          class="btn theme-toggle"
           size="sm"
           :variant="isDarkMode ? 'secondary' : 'dark'"
           @click="toggleDarkMode"
@@ -42,4 +42,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.navbar-dark .theme-toggle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-light .theme-toggle {
+  color: rgba(0, 0, 0, 0.9);
+}
+</style>

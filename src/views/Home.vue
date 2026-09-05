@@ -31,12 +31,12 @@
             <p class="lead">
               <b-button variant="none" :href="halloweenCalendarID">
                 <h3>
-                  <font-awesome-icon :icon="['fab', 'apple']" size="lg" />
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
                 </h3>
               </b-button>
               <!-- <b-button variant="none" :href="halloweenCalendarID">
                 <h5>
-                  <font-awesome-icon :icon="['fab', 'google']" size="lg" />
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
                 </h5>
               </b-button> -->
             </p>
@@ -50,12 +50,12 @@
               <p class="lead">
                 <b-button variant="none" :href="christmasCalendarID">
                   <h3>
-                    <font-awesome-icon :icon="['fab', 'apple']" size="lg" />
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
                   </h3>
                 </b-button>
                 <!-- <b-button variant="none" :href="christmasCalendarID">
                   <h5>
-                    <font-awesome-icon :icon="['fab', 'google']" size="lg" />
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
                   </h5>
                 </b-button> -->
               </p>

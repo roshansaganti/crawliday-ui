@@ -45,4 +45,12 @@ export default {
 #app.theme-dark .text-muted {
   color: #c0cad6 !important;
 }
+
+.theme-icon {
+  color: #212529;
+}
+
+#app.theme-dark .theme-icon {
+  color: #f0f3f6;
+}
 </style>

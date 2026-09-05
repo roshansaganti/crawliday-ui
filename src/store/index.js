@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isDarkMode: localStorage.getItem('crawliday-theme') === 'dark',
+    isDarkMode: localStorage.getItem('crawliday-theme') !== 'light',
   },
   getters: {
     isDarkMode: (state) => state.isDarkMode,
