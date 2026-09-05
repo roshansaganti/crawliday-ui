@@ -1,13 +1,13 @@
 <template>
   <div class="footer">
-    <footer class="pt-5 pb-3 text-center">
-      <b-button
+    <footer class="pb-5 text-center">
+      <!-- <b-button
         href="https://github.com/roshansaganti/crawliday"
         target="_blank"
         variant="none"
       >
         <font-awesome-icon class="theme-icon" :icon="['fab', 'github']" size="xl" />
-      </b-button>
+      </b-button> -->
       <br /><br />
       <div class="text-muted small">
         &copy; Roshan Saganti. All Rights Reserved. 2024.
