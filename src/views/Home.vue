@@ -43,11 +43,42 @@
 
         <!-- Filter Section -->
         <b-col cols="1">
-          <b-button class="w-100" variant="secondary">
+          <b-button class="w-100" variant="secondary" v-b-toggle.filter-collapse>
             <font-awesome-icon class="theme-icon" :icon="['fas', 'filter']" size="md" />
           </b-button>
         </b-col>
       </b-row>
+
+      <!-- Collapse Section -->
+      <b-collapse visible id="filter-collapse" class="mt-1 mb-4">
+        <b-card>
+          <b-row>
+            <b-col md="2">
+              <b-form-group label="Type">
+                <b-form-checkbox v-model="filters.halloween">&nbsp;&nbsp;Halloween</b-form-checkbox>
+                <b-form-checkbox v-model="filters.christmas">&nbsp;&nbsp;Christmas</b-form-checkbox>
+              </b-form-group>
+            </b-col>
+            <b-col md="4">
+              <b-form-group label="Date Range">
+                <b-row>
+                  <b-col cols="6">
+                    <b-form-datepicker v-model="filters.startDate" placeholder="Start Date"></b-form-datepicker>
+                  </b-col>
+                  <b-col cols="6">
+                    <b-form-datepicker v-model="filters.endDate" placeholder="End Date"></b-form-datepicker>
+                  </b-col>
+                </b-row>
+              </b-form-group>
+            </b-col>
+            <b-col md="6">
+              <b-form-group label="Location">
+                <b-form-select v-model="filters.location" :options="locationOptions"></b-form-select>
+              </b-form-group>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-collapse>
 
       <b-row>
         <!-- Movie Schedule Table -->
