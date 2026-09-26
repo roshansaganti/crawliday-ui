@@ -1,9 +1,9 @@
 <template>
-  <div class="home">
+  <div class="login">
     <Navbar></Navbar>
 
     <b-container>
-      test
+
     </b-container>
 
     <Footer></Footer>
@@ -16,23 +16,14 @@ import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
-  name: "Home",
+  name: "Login",
   components: {
     Navbar,
     Footer,
   },
   data() {
-    return {
-      halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
-      christmasCalendarID: process.env.VUE_APP_CHRISTMAS_ICAL,
-      halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
-      christmasCalendarEmbed: process.env.VUE_APP_CHRISTMAS_EMBED,
-    };
+    return {};
   },
-  computed: {
-    isDarkMode() {
-      return this.$store.getters.isDarkMode;
-    },
-  },
+  computed: {},
 };
 </script>
