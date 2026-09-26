@@ -18,7 +18,23 @@
         >
           <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
         </a>
-        <router-link to="/login" class="btn theme-toggle" size="sm">
+        <button
+          v-if="isAuthenticated"
+          type="button"
+          class="btn theme-toggle"
+          title="Log out"
+          aria-label="Log out"
+          @click="logout"
+        >
+          <font-awesome-icon :icon="['fas', 'right-from-bracket']" size="lg" />
+        </button>
+        <router-link
+          v-else
+          to="/login"
+          class="btn theme-toggle"
+          title="Log in"
+          aria-label="Log in"
+        >
           <font-awesome-icon :icon="['fas', 'right-to-bracket']" size="lg" />
         </router-link>
       </b-navbar-nav>
@@ -36,10 +52,23 @@ export default {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
     },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+  },
+  created() {
+    this.$store.dispatch("checkAuthentication");
   },
   methods: {
     toggleDarkMode() {
       this.$store.commit("TOGGLE_DARK_MODE");
+    },
+    async logout() {
+      try {
+        await this.$store.dispatch("logout");
+      } catch (error) {
+        console.error("Unable to log out", error);
+      }
     },
   },
 };

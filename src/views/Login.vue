@@ -78,7 +78,7 @@ export default {
         process.env.VUE_APP_API_BASE_URL || window.location.origin;
       const normalizedBaseUrl = apiBaseUrl.replace(/\/+$/, "");
 
-      window.location.assign(`${process.env.VUE_APP_API_BASE_URL}/oauth/login/github/`);
+      window.location.assign(`${normalizedBaseUrl}/oauth/login/github/`);
     },
   },
 };
