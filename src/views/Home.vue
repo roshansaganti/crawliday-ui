@@ -23,6 +23,49 @@
         </b-col>
         <b-col xs="0" sm="0" md="2" lg="2" xl="2"></b-col>
       </b-row>
+
+      <b-row>
+        <!-- Search Bar -->
+        <b-col cols="11">
+          <b-input-group class="mb-3">
+            <b-button variant="danger">
+              <font-awesome-icon class="theme-icon" :icon="['fas', 'times']" size="md" />
+            </b-button>
+            <b-form-input
+              v-model="searchQuery"
+              placeholder="Search movies..."
+            ></b-form-input>
+            <b-button variant="primary">
+              <font-awesome-icon class="theme-icon" :icon="['fas', 'search']" size="md" />
+            </b-button>
+          </b-input-group>
+        </b-col>
+
+        <!-- Filter Section -->
+        <b-col cols="1">
+          <b-button class="w-100" variant="secondary">
+            <font-awesome-icon class="theme-icon" :icon="['fas', 'filter']" size="md" />
+          </b-button>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <!-- Movie Schedule Table -->
+        <b-col cols="12">
+          <b-card no-body class="overflow-hidden">
+            <b-table
+              class="mb-0 table-responsive"
+              :dark="isDarkMode"
+              borderless
+              striped
+              responsive
+              hover
+              :items="tableItems"
+              :fields="tableFields"
+            ></b-table>
+          </b-card>
+        </b-col>
+      </b-row>
     </b-container>
 
     <Footer></Footer>
@@ -42,6 +85,31 @@ export default {
   },
   data() {
     return {
+      filters: {
+        halloween: true,
+        christmas: true,
+        startDate: null,
+        endDate: null,
+        location: "all",
+      },
+      locationOptions: [
+        { value: "all", text: "All locations" },
+        { value: "national", text: "National" },
+        { value: "local", text: "Local" },
+      ],
+      searchQuery: "",
+      tableFields: [
+        { key: "date", label: "Date" },
+        { key: "time", label: "Time" },
+        { key: "title", label: "Movie" },
+        { key: "channel", label: "Channel" },
+        { key: "type", label: "Type" },
+      ],
+      tableItems: [
+        { date: "2025-10-31", time: "7:00 PM", title: "It's the Great Pumpkin, Charlie Brown", channel: "ABC", type: "Halloween" },
+        { date: "2025-12-24", time: "8:00 PM", title: "A Christmas Story", channel: "TBS", type: "Christmas" },
+        { date: "2025-12-25", time: "6:30 PM", title: "The Polar Express", channel: "AMC", type: "Christmas" },
+      ],
       halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
       christmasCalendarID: process.env.VUE_APP_CHRISTMAS_ICAL,
       halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
