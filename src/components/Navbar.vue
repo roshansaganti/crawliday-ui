@@ -18,25 +18,17 @@
         >
           <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
         </a>
-        <button
-          v-if="isAuthenticated"
-          type="button"
-          class="btn theme-toggle"
-          title="Log out"
-          aria-label="Log out"
-          @click="logout"
-        >
-          <font-awesome-icon :icon="['fas', 'right-from-bracket']" size="lg" />
-        </button>
-        <router-link
-          v-else
-          to="/login"
-          class="btn theme-toggle"
-          title="Log in"
-          aria-label="Log in"
-        >
-          <font-awesome-icon :icon="['fas', 'right-to-bracket']" size="lg" />
-        </router-link>
+        <b-nav-item-dropdown right v-if="isAuthenticated">
+          <!-- Using 'button-content' slot -->
+          <template #button-content>
+            {{ isAuthenticated ? 'User' : 'Guest' }}
+          </template>
+          <!-- <b-dropdown-item href="#" class="theme-toggle">Profile</b-dropdown-item> -->
+          <b-dropdown-item @click="logout" class="theme-toggle">Logout</b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-navbar-nav v-else>
+          <b-nav-item to="/login">Login</b-nav-item>
+        </b-navbar-nav>
       </b-navbar-nav>
 
       <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
