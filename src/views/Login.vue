@@ -39,7 +39,12 @@
 
             <hr> -->
 
-            <b-button variant="light" size="md" class="github-login-button my-3">
+            <b-button
+              variant="light"
+              size="md"
+              class="github-login-button my-3"
+              @click="startGithubLogin"
+            >
               <font-awesome-icon :icon="['fab', 'github']" class="mr-2" />
               Continue with GitHub
             </b-button>
@@ -67,5 +72,14 @@ export default {
     return {};
   },
   computed: {},
+  methods: {
+    startGithubLogin() {
+      const apiBaseUrl =
+        process.env.VUE_APP_API_BASE_URL || window.location.origin;
+      const normalizedBaseUrl = apiBaseUrl.replace(/\/+$/, "");
+
+      window.location.assign(`${process.env.VUE_APP_API_BASE_URL}/oauth/login/github/`);
+    },
+  },
 };
 </script>
