@@ -50,7 +50,7 @@
       </b-row>
 
       <!-- Collapse Section -->
-      <b-collapse visible id="filter-collapse" class="mt-1 mb-4">
+      <b-collapse id="filter-collapse" class="mt-1 mb-4">
         <b-card>
           <b-row>
             <b-col md="2">
