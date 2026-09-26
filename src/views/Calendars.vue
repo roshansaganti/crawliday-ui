@@ -1,0 +1,103 @@
+<template>
+  <div class="calendars">
+    <Navbar></Navbar>
+
+    <b-container>
+      <b-row class="pt-5">
+        <b-col>
+          <div class="text-center">
+            <p class="lead">Subscribe to the Halloween Calendar</p>
+
+            <p class="lead">
+              <b-button variant="none" :href="halloweenCalendarID">
+                <h3>
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
+                </h3>
+              </b-button>
+              <!-- <b-button variant="none" :href="halloweenCalendarID">
+                <h5>
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
+                </h5>
+              </b-button> -->
+            </p>
+          </div>
+        </b-col>
+        <b-col>
+          <div class="text-center">
+            <p class="lead">Subscribe to the Christmas Calendar</p>
+
+            <!-- <h5>Coming Soon!</h5> -->
+              <p class="lead">
+                <b-button variant="none" :href="christmasCalendarID">
+                  <h3>
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
+                  </h3>
+                </b-button>
+                <!-- <b-button variant="none" :href="christmasCalendarID">
+                  <h5>
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
+                  </h5>
+                </b-button> -->
+              </p>
+          </div>
+        </b-col>
+      </b-row>
+
+      <b-card class="mt-3" no-body>
+        <b-tabs card>
+          <b-tab title="Halloween">
+            <iframe
+              :src="halloweenCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
+              style="border: 0"
+              width="100%"
+              height="800"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+          </b-tab>
+          <b-tab title="Christmas" active>
+            <iframe
+              :src="christmasCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
+              style="border: 0"
+              width="100%"
+              height="800"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+          </b-tab>
+        </b-tabs>
+      </b-card>
+    </b-container>
+
+    <Footer></Footer>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
+
+export default {
+  name: "Calendars",
+  components: {
+    Navbar,
+    Footer,
+  },
+  data() {
+    return {
+      halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
+      christmasCalendarID: process.env.VUE_APP_CHRISTMAS_ICAL,
+      halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
+      christmasCalendarEmbed: process.env.VUE_APP_CHRISTMAS_EMBED,
+    };
+  },
+  computed: {
+    isDarkMode() {
+      return this.$store.getters.isDarkMode;
+    },
+  },
+};
+</script>

@@ -5,21 +5,13 @@
     :variant="isDarkMode ? 'dark' : 'light'"
   >
     <b-container>
-      <b-navbar-brand href="#">Crawliday</b-navbar-brand>
+      <b-navbar-brand to="/">Crawliday</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="me-auto">
-          <b-nav-item-dropdown>
-            <template #button-content>
-              Calendars
-            </template>
-
-            <b-dropdown-item href="#">Halloween</b-dropdown-item>
-            <!-- <b-dropdown-item href="#">Thanksgiving</b-dropdown-item> -->
-            <b-dropdown-item href="#">Christmas</b-dropdown-item>
-          </b-nav-item-dropdown>
+          <b-nav-item to="/calendars">Calendars</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ms-auto">
