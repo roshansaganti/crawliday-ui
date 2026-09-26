@@ -5,7 +5,7 @@
     :variant="isDarkMode ? 'dark' : 'light'"
   >
     <b-container>
-      <b-navbar-brand href="#">Crawliday</b-navbar-brand>
+      <b-navbar-brand to="/">Crawliday</b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
         <a
@@ -18,6 +18,9 @@
         >
           <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
         </a>
+        <router-link to="/login" class="btn theme-toggle" size="sm">
+          <font-awesome-icon :icon="['fas', 'right-to-bracket']" size="lg" />
+        </router-link>
       </b-navbar-nav>
 
       <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
