@@ -8,7 +8,7 @@
       <b-navbar-brand to="/">Crawliday</b-navbar-brand>
 
       <b-navbar-nav class="ml-auto">
-        <a
+        <!-- <a
           class="btn theme-toggle"
           size="sm"
           :variant="isDarkMode ? 'secondary' : 'dark'"
@@ -17,7 +17,7 @@
           :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
         >
           <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
-        </a>
+        </a> -->
         <b-nav-item-dropdown right v-if="isAuthenticated">
           <!-- Using 'button-content' slot -->
           <template #button-content>
