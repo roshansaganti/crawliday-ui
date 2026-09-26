@@ -42,8 +42,8 @@ export default new Vuex.Store({
           return
         }
 
-        const user = await response.json()
-        commit('SET_USER', user)
+        const authPayload = await response.json()
+        commit('SET_USER', authPayload.authenticated ? authPayload.user : null)
       } catch (error) {
         commit('SET_USER', null)
       }

@@ -21,7 +21,7 @@
         <b-nav-item-dropdown right v-if="isAuthenticated">
           <!-- Using 'button-content' slot -->
           <template #button-content>
-            {{ isAuthenticated ? 'User' : 'Guest' }}
+            {{ userName }}
           </template>
           <!-- <b-dropdown-item href="#" class="theme-toggle">Profile</b-dropdown-item> -->
           <b-dropdown-item @click="logout" class="theme-toggle">Logout</b-dropdown-item>
@@ -46,6 +46,10 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters.isAuthenticated;
+    },
+    userName() {
+      const user = this.$store.state.user;
+      return user ? user.username || user.name || user.login || "Account" : "";
     },
   },
   created() {
