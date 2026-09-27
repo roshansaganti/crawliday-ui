@@ -130,17 +130,12 @@ export default {
       ],
       searchQuery: "",
       tableFields: [
-        { key: "date", label: "Date" },
-        { key: "time", label: "Time" },
         { key: "title", label: "Movie" },
+        { key: "release_date", label: "Release Date" },
+        { key: "airing_time", label: "Airing Time" },
         { key: "channel", label: "Channel" },
-        { key: "type", label: "Type" },
       ],
-      tableItems: [
-        { date: "2025-10-31", time: "7:00 PM", title: "It's the Great Pumpkin, Charlie Brown", channel: "ABC", type: "Halloween" },
-        { date: "2025-12-24", time: "8:00 PM", title: "A Christmas Story", channel: "TBS", type: "Christmas" },
-        { date: "2025-12-25", time: "6:30 PM", title: "The Polar Express", channel: "AMC", type: "Christmas" },
-      ],
+      tableItems: [],
       halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
       christmasCalendarID: process.env.VUE_APP_CHRISTMAS_ICAL,
       halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
@@ -150,6 +145,39 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
+    },
+  },
+  mounted() {
+    this.fetchMedia();
+  },
+  methods: {
+    async fetchMedia() {
+      const mediaItems = [];
+      const apiBaseUrl = (process.env.VUE_APP_API_BASE_URL || "").replace(/\/+$/, "");
+      let nextPage = `${apiBaseUrl}/api/media`;
+
+      try {
+        while (nextPage) {
+          const response = await fetch(nextPage);
+          if (!response.ok) {
+            throw new Error(`Media request failed: ${response.status}`);
+          }
+
+          const data = await response.json();
+          if (Array.isArray(data)) {
+            mediaItems.push(...data);
+            nextPage = null;
+          } else {
+            mediaItems.push(...(data.results || []));
+            nextPage = data.next ? new URL(data.next, apiBaseUrl).toString() : null;
+          }
+        }
+
+        this.tableItems = mediaItems;
+        console.log("Fetched media items:", this.tableItems);
+      } catch (error) {
+        console.error("Failed to fetch media:", error);
+      }
     },
   },
 };
