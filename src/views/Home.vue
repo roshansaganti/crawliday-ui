@@ -29,14 +29,14 @@
         <b-col cols="11">
           <b-input-group class="mb-3">
             <b-button variant="danger">
-              <font-awesome-icon class="theme-icon" :icon="['fas', 'times']" size="md" />
+              <font-awesome-icon class="theme-icon" :icon="['fas', 'times']" />
             </b-button>
             <b-form-input
               v-model="searchQuery"
               placeholder="Search movies..."
             ></b-form-input>
             <b-button variant="primary">
-              <font-awesome-icon class="theme-icon" :icon="['fas', 'search']" size="md" />
+              <font-awesome-icon class="theme-icon" :icon="['fas', 'search']" />
             </b-button>
           </b-input-group>
         </b-col>
@@ -44,7 +44,7 @@
         <!-- Filter Section -->
         <b-col cols="1">
           <b-button class="w-100" variant="secondary" v-b-toggle.filter-collapse>
-            <font-awesome-icon class="theme-icon" :icon="['fas', 'filter']" size="md" />
+            <font-awesome-icon class="theme-icon" :icon="['fas', 'filter']" />
           </b-button>
         </b-col>
       </b-row>
