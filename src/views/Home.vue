@@ -28,14 +28,25 @@
         <!-- Search Bar -->
         <b-col cols="11">
           <b-input-group class="mb-3">
-            <b-button variant="danger">
+            <b-button
+              type="button"
+              variant="danger"
+              aria-label="Clear search"
+              @click="clearSearch"
+            >
               <font-awesome-icon class="theme-icon" :icon="['fas', 'times']" />
             </b-button>
             <b-form-input
+              ref="searchInput"
               v-model="searchQuery"
               placeholder="Search movies..."
+              @keyup.enter="searchQuery = searchQuery.trim()"
             ></b-form-input>
-            <b-button variant="primary">
+            <b-button
+              variant="primary"
+              aria-label="Search movies"
+              @click="searchQuery = searchQuery.trim()"
+            >
               <font-awesome-icon class="theme-icon" :icon="['fas', 'search']" />
             </b-button>
           </b-input-group>
@@ -91,7 +102,7 @@
               striped
               responsive
               hover
-              :items="tableItems"
+              :items="filteredTableItems"
               :fields="tableFields"
             >
               <template #cell(release_date)="data">
@@ -157,11 +168,36 @@ export default {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
     },
+    filteredTableItems() {
+      const query = this.searchQuery.trim().toLowerCase();
+      if (!query) return this.tableItems;
+
+      return this.tableItems.filter((item) => {
+        const searchableValues = [
+          item.title,
+          item.kind,
+          item.description,
+          item.release_date,
+          item.airing_time,
+          item.channel,
+          item.source_name,
+          this.holidayName(item),
+        ];
+
+        return searchableValues.some((value) =>
+          String(value || "").toLowerCase().includes(query)
+        );
+      });
+    },
   },
   mounted() {
     this.fetchMedia();
   },
   methods: {
+    clearSearch() {
+      this.searchQuery = "";
+      this.$nextTick(() => this.$refs.searchInput.focus());
+    },
     holidayName(item) {
       if (Number(item.holiday_id) === 1) return "Christmas";
       if (Number(item.holiday_id) === 2) return "Halloween";
