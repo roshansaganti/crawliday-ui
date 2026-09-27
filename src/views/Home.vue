@@ -93,7 +93,17 @@
               hover
               :items="tableItems"
               :fields="tableFields"
-            ></b-table>
+            >
+              <template #cell(release_date)="data">
+                {{ formatReleaseDate(data.value) }}
+              </template>
+              <template #cell(airing_time)="data">
+                {{ formatAiringTime(data.value) }}
+              </template>
+              <template #cell(holiday)="data">
+                {{ holidayName(data.item) }}
+              </template>
+            </b-table>
           </b-card>
         </b-col>
       </b-row>
@@ -130,10 +140,11 @@ export default {
       ],
       searchQuery: "",
       tableFields: [
+        { key: "airing_time", label: "Showtime" },
         { key: "title", label: "Movie" },
-        { key: "release_date", label: "Release Date" },
-        { key: "airing_time", label: "Airing Time" },
+        // { key: "release_date", label: "Release Date" },
         { key: "channel", label: "Channel" },
+        { key: "holiday", label: "Holiday" },
       ],
       tableItems: [],
       halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
@@ -151,6 +162,35 @@ export default {
     this.fetchMedia();
   },
   methods: {
+    holidayName(item) {
+      if (Number(item.holiday_id) === 1) return "Christmas";
+      if (Number(item.holiday_id) === 2) return "Halloween";
+      return "—";
+    },
+    formatReleaseDate(value) {
+      if (!value) return "—";
+
+      const [year, month, day] = value.slice(0, 10).split("-").map(Number);
+      const date = new Date(year, month - 1, day);
+      if (Number.isNaN(date.getTime())) return value;
+
+      return date.toLocaleDateString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+    },
+    formatAiringTime(value) {
+      if (!value) return "—";
+
+      const [hours, minutes, seconds = 0] = value.split(":").map(Number);
+      if ([hours, minutes, seconds].some(Number.isNaN)) return value;
+
+      return new Date(2000, 0, 1, hours, minutes, seconds).toLocaleTimeString(
+        undefined,
+        { hour: "numeric", minute: "2-digit" }
+      );
+    },
     async fetchMedia() {
       const mediaItems = [];
       const apiBaseUrl = (process.env.VUE_APP_API_BASE_URL || "").replace(/\/+$/, "");
