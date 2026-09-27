@@ -170,9 +170,20 @@ export default {
     },
     filteredTableItems() {
       const query = this.searchQuery.trim().toLowerCase();
-      if (!query) return this.tableItems;
-
       return this.tableItems.filter((item) => {
+        const holidayId = Number(item.holiday_id);
+        if (holidayId === 1 && !this.filters.christmas) return false;
+        if (holidayId === 2 && !this.filters.halloween) return false;
+
+        const itemDate = this.itemDate(item);
+        if (this.filters.startDate && (!itemDate || itemDate < this.filters.startDate)) {
+          return false;
+        }
+        if (this.filters.endDate && (!itemDate || itemDate > this.filters.endDate)) {
+          return false;
+        }
+        if (!this.matchesLocation(item)) return false;
+
         const searchableValues = [
           item.title,
           item.kind,
@@ -184,7 +195,7 @@ export default {
           this.holidayName(item),
         ];
 
-        return searchableValues.some((value) =>
+        return !query || searchableValues.some((value) =>
           String(value || "").toLowerCase().includes(query)
         );
       });
@@ -194,6 +205,25 @@ export default {
     this.fetchMedia();
   },
   methods: {
+    itemDate(item) {
+      const value = item.airing_date || item.date || item.release_date;
+      return value ? String(value).slice(0, 10) : null;
+    },
+    matchesLocation(item) {
+      const selectedLocation = this.filters.location;
+      if (selectedLocation === "all") return true;
+
+      if (typeof item.is_national === "boolean") {
+        return selectedLocation === "national"
+          ? item.is_national
+          : !item.is_national;
+      }
+
+      const location = item.location || item.location_type || item.coverage || item.market;
+      return location
+        ? String(location).toLowerCase().includes(selectedLocation)
+        : false;
+    },
     clearSearch() {
       this.searchQuery = "";
       this.$nextTick(() => this.$refs.searchInput.focus());
