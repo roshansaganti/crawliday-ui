@@ -5,24 +5,28 @@
     :variant="isDarkMode ? 'dark' : 'light'"
   >
     <b-container>
-      <b-navbar-brand href="#">Crawliday</b-navbar-brand>
+      <b-navbar-brand to="/">Crawliday</b-navbar-brand>
 
-      <b-navbar-nav class="ml-auto">
-        <a
-          class="btn theme-toggle"
-          size="sm"
-          :variant="isDarkMode ? 'secondary' : 'dark'"
-          @click="toggleDarkMode"
-          :title="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-          :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-        >
-          <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
-        </a>
-      </b-navbar-nav>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav class="me-auto">
+          <b-nav-item to="/catalog">Catalog</b-nav-item>
+        </b-navbar-nav>
 
-      <!-- <b-collapse id="nav-collapse" is-nav></b-collapse> -->
+        <b-navbar-nav class="ms-auto">
+          <a
+            class="btn theme-toggle"
+            size="sm"
+            :variant="isDarkMode ? 'secondary' : 'dark'"
+            @click="toggleDarkMode"
+            :title="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+            :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+          >
+            <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
+          </a>
+        </b-navbar-nav>
+      </b-collapse>
     </b-container>
   </b-navbar>
 </template>
