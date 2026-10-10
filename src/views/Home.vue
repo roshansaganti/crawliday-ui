@@ -32,6 +32,7 @@
               type="button"
               variant="danger"
               aria-label="Clear search"
+              :disabled="!hasMedia"
               @click="clearSearch"
             >
               <font-awesome-icon class="theme-icon" :icon="['fas', 'times']" />
@@ -40,11 +41,13 @@
               ref="searchInput"
               v-model="searchQuery"
               placeholder="Search movies..."
+              :disabled="!hasMedia"
               @keyup.enter="searchQuery = searchQuery.trim()"
             ></b-form-input>
             <b-button
               variant="primary"
               aria-label="Search movies"
+              :disabled="!hasMedia"
               @click="searchQuery = searchQuery.trim()"
             >
               <font-awesome-icon class="theme-icon" :icon="['fas', 'search']" />
@@ -54,7 +57,12 @@
 
         <!-- Filter Section -->
         <b-col cols="1">
-          <b-button class="w-100" variant="secondary" v-b-toggle.filter-collapse>
+          <b-button
+            class="w-100"
+            variant="secondary"
+            :disabled="!hasMedia"
+            v-b-toggle.filter-collapse
+          >
             <font-awesome-icon class="theme-icon" :icon="['fas', 'filter']" />
           </b-button>
         </b-col>
@@ -102,9 +110,25 @@
               striped
               responsive
               hover
+              show-empty
+              :busy="isLoading"
               :items="filteredTableItems"
               :fields="tableFields"
             >
+              <template #table-busy>
+                <div class="text-center py-4">
+                  <b-spinner class="align-middle" aria-label="Loading"></b-spinner>
+                  <!-- <span class="ml-2">Loading movie schedules...</span> -->
+                </div>
+              </template>
+              <template #empty>
+                <div class="text-center py-4">
+                  <span class="text-muted" v-if="fetchFailed">Unable to load movie schedules. Please try again later.</span>
+                  <span class="text-muted" v-else-if="tableItems.length === 0">No movie schedules found.</span>
+                  <span class="text-muted" v-else-if="searchQuery.trim()">No movies match "{{ searchQuery.trim() }}".</span>
+                  <span class="text-muted" v-else>No movies match your filters.</span>
+                </div>
+              </template>
               <template #cell(release_date)="data">
                 {{ formatReleaseDate(data.value) }}
               </template>
@@ -158,6 +182,8 @@ export default {
         { key: "holiday", label: "Holiday" },
       ],
       tableItems: [],
+      isLoading: true,
+      fetchFailed: false,
       halloweenCalendarID: process.env.VUE_APP_HALLOWEEN_ICAL,
       christmasCalendarID: process.env.VUE_APP_CHRISTMAS_ICAL,
       halloweenCalendarEmbed: process.env.VUE_APP_HALLOWEEN_EMBED,
@@ -167,6 +193,9 @@ export default {
   computed: {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
+    },
+    hasMedia() {
+      return this.tableItems.length > 0;
     },
     filteredTableItems() {
       const query = this.searchQuery.trim().toLowerCase();
@@ -258,6 +287,8 @@ export default {
       );
     },
     async fetchMedia() {
+      this.isLoading = true;
+      this.fetchFailed = false;
       const mediaItems = [];
       const apiBaseUrl = (process.env.VUE_APP_API_BASE_URL || "").replace(/\/+$/, "");
       let nextPage = `${apiBaseUrl}/api/media`;
@@ -282,7 +313,10 @@ export default {
         this.tableItems = mediaItems;
         console.log("Fetched media items:", this.tableItems);
       } catch (error) {
+        this.fetchFailed = true;
         console.error("Failed to fetch media:", error);
+      } finally {
+        this.isLoading = false;
       }
     },
   },
