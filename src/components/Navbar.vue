@@ -10,11 +10,14 @@
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
+        <!-- Left-aligned navigation items -->
         <b-navbar-nav class="me-auto">
           <b-nav-item to="/catalog">Catalog</b-nav-item>
         </b-navbar-nav>
 
+        <!-- Right-aligned navigation items -->
         <b-navbar-nav class="ms-auto">
+          <!-- Theme toggle button -->
           <a
             class="btn theme-toggle"
             size="sm"
@@ -30,6 +33,8 @@
               size="lg"
             />
           </a>
+
+          <!-- User authentication dropdown -->
           <b-nav-item-dropdown right v-if="isAuthenticated">
             <!-- Using 'button-content' slot -->
             <template #button-content>
@@ -40,6 +45,8 @@
               >Logout</b-dropdown-item
             >
           </b-nav-item-dropdown>
+
+          <!-- Login link for unauthenticated users -->
           <b-navbar-nav v-else>
             <b-nav-item to="/login">Login</b-nav-item>
           </b-navbar-nav>
