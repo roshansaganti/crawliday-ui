@@ -19,6 +19,40 @@
         <b-col xs="0" sm="0" md="2" lg="2" xl="2"></b-col>
       </b-row>
 
+      <b-row class="pb-5">
+        <!-- Statistics -->
+        <b-col>
+          <div class="border-top border-bottom py-3">
+            <b-row class="align-items-center">
+              <b-col cols="12" md="3" class="mb-3 mb-md-0">
+                <div class="text-muted small">TOTAL LISTINGS</div>
+                <div class="h3 mb-0" v-if="isLoading">
+                  <b-spinner class="align-middle" aria-label="Loading" small></b-spinner>
+                </div>
+                <div class="h3 mb-0" v-else-if="fetchFailed">Err</div>
+                <div class="h3 mb-0" v-else>{{ catalogStats.total }}</div>
+              </b-col>
+              <b-col cols="6" md="3">
+                <div class="text-muted small">CHRISTMAS</div>
+                <div class="h3 mb-0" v-if="isLoading">
+                  <b-spinner class="align-middle" aria-label="Loading" small></b-spinner>
+                </div>
+                <div class="h3 mb-0" v-else-if="fetchFailed">Err</div>
+                <div class="h3 mb-0" v-else>{{ catalogStats.christmas }}</div>
+              </b-col>
+              <b-col cols="6" md="3">
+                <div class="text-muted small">HALLOWEEN</div>
+                <div class="h3 mb-0" v-if="isLoading">
+                  <b-spinner class="align-middle" aria-label="Loading" small></b-spinner>
+                </div>
+                <div class="h3 mb-0" v-else-if="fetchFailed">Err</div>
+                <div class="h3 mb-0" v-else>{{ catalogStats.halloween }}</div>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+
       <b-row>
         <!-- Search Bar -->
         <b-col cols="11">
@@ -191,6 +225,29 @@ export default {
     },
     hasMedia() {
       return this.tableItems.length > 0;
+    },
+    catalogStats() {
+      const stats = {
+        total: this.tableItems.length,
+        christmas: 0,
+        halloween: 0,
+        kinds: {},
+      };
+
+      this.tableItems.forEach((item) => {
+        const holidayId = Number(item.holiday_id);
+        if (holidayId === 1) stats.christmas += 1;
+        if (holidayId === 2) stats.halloween += 1;
+
+        const kind = String(item.kind || "Unspecified").trim() || "Unspecified";
+        stats.kinds[kind] = (stats.kinds[kind] || 0) + 1;
+      });
+
+      stats.kinds = Object.keys(stats.kinds)
+        .sort((first, second) => first.localeCompare(second))
+        .map((name) => ({ name, count: stats.kinds[name] }));
+
+      return stats;
     },
     filteredTableItems() {
       const query = this.searchQuery.trim().toLowerCase();
