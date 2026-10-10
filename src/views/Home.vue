@@ -24,7 +24,7 @@
         <b-col xs="0" sm="0" md="2" lg="2" xl="2"></b-col>
       </b-row>
 
-      <b-row class="pt-5">
+      <b-row class="pb-5">
         <b-col>
           <div class="text-center">
             <p class="lead">Subscribe to the Halloween Calendar</p>
@@ -64,7 +64,7 @@
         </b-col>
       </b-row>
 
-      <b-card class="mt-3" no-body>
+      <b-card no-body>
         <b-tabs card>
           <b-tab title="Halloween">
             <iframe
