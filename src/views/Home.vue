@@ -24,124 +24,72 @@
         <b-col xs="0" sm="0" md="2" lg="2" xl="2"></b-col>
       </b-row>
 
-      <b-row>
-        <!-- Search Bar -->
-        <b-col cols="11">
-          <b-input-group class="mb-3">
-            <b-button
-              type="button"
-              variant="danger"
-              aria-label="Clear search"
-              :disabled="!hasMedia"
-              @click="clearSearch"
-            >
-              <font-awesome-icon class="theme-icon" :icon="['fas', 'times']" />
-            </b-button>
-            <b-form-input
-              ref="searchInput"
-              v-model="searchQuery"
-              placeholder="Search movies..."
-              :disabled="!hasMedia"
-              @keyup.enter="searchQuery = searchQuery.trim()"
-            ></b-form-input>
-            <b-button
-              variant="primary"
-              aria-label="Search movies"
-              :disabled="!hasMedia"
-              @click="searchQuery = searchQuery.trim()"
-            >
-              <font-awesome-icon class="theme-icon" :icon="['fas', 'search']" />
-            </b-button>
-          </b-input-group>
-        </b-col>
+      <b-row class="pt-5">
+        <b-col>
+          <div class="text-center">
+            <p class="lead">Subscribe to the Halloween Calendar</p>
 
-        <!-- Filter Section -->
-        <b-col cols="1">
-          <b-button
-            class="w-100"
-            variant="secondary"
-            :disabled="!hasMedia"
-            v-b-toggle.filter-collapse
-          >
-            <font-awesome-icon class="theme-icon" :icon="['fas', 'filter']" />
-          </b-button>
+            <p class="lead">
+              <b-button variant="none" :href="halloweenCalendarID">
+                <h3>
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
+                </h3>
+              </b-button>
+              <!-- <b-button variant="none" :href="halloweenCalendarID">
+                <h5>
+                  <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
+                </h5>
+              </b-button> -->
+            </p>
+          </div>
+        </b-col>
+        <b-col>
+          <div class="text-center">
+            <p class="lead">Subscribe to the Christmas Calendar</p>
+
+            <!-- <h5>Coming Soon!</h5> -->
+              <p class="lead">
+                <b-button variant="none" :href="christmasCalendarID">
+                  <h3>
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'apple']" size="lg" />
+                  </h3>
+                </b-button>
+                <!-- <b-button variant="none" :href="christmasCalendarID">
+                  <h5>
+                    <font-awesome-icon class="theme-icon" :icon="['fab', 'google']" size="lg" />
+                  </h5>
+                </b-button> -->
+              </p>
+          </div>
         </b-col>
       </b-row>
 
-      <!-- Collapse Section -->
-      <b-collapse id="filter-collapse" class="mt-1 mb-4">
-        <b-card>
-          <b-row>
-            <b-col md="2">
-              <b-form-group label="Type">
-                <b-form-checkbox v-model="filters.halloween">&nbsp;&nbsp;Halloween</b-form-checkbox>
-                <b-form-checkbox v-model="filters.christmas">&nbsp;&nbsp;Christmas</b-form-checkbox>
-              </b-form-group>
-            </b-col>
-            <b-col md="4">
-              <b-form-group label="Date Range">
-                <b-row>
-                  <b-col cols="6">
-                    <b-form-datepicker v-model="filters.startDate" placeholder="Start Date"></b-form-datepicker>
-                  </b-col>
-                  <b-col cols="6">
-                    <b-form-datepicker v-model="filters.endDate" placeholder="End Date"></b-form-datepicker>
-                  </b-col>
-                </b-row>
-              </b-form-group>
-            </b-col>
-            <b-col md="6">
-              <b-form-group label="Location">
-                <b-form-select v-model="filters.location" :options="locationOptions"></b-form-select>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </b-card>
-      </b-collapse>
-
-      <b-row>
-        <!-- Movie Schedule Table -->
-        <b-col cols="12">
-          <b-card no-body class="overflow-hidden">
-            <b-table
-              class="mb-0 table-responsive"
-              :dark="isDarkMode"
-              borderless
-              striped
-              responsive
-              hover
-              show-empty
-              :busy="isLoading"
-              :items="filteredTableItems"
-              :fields="tableFields"
-            >
-              <template #table-busy>
-                <div class="text-center py-4">
-                  <b-spinner class="align-middle" aria-label="Loading"></b-spinner>
-                  <!-- <span class="ml-2">Loading movie schedules...</span> -->
-                </div>
-              </template>
-              <template #empty>
-                <div class="text-center py-4">
-                  <span class="text-muted" v-if="fetchFailed">Unable to load movie schedules. Please try again later.</span>
-                  <span class="text-muted" v-else-if="tableItems.length === 0">No movie schedules found.</span>
-                  <span class="text-muted" v-else-if="searchQuery.trim()">No movies match "{{ searchQuery.trim() }}".</span>
-                  <span class="text-muted" v-else>No movies match your filters.</span>
-                </div>
-              </template>
-              <template #cell(release_date)="data">
-                {{ formatReleaseDate(data.value) }}
-              </template>
-              <template #cell(airing_time)="data">
-                {{ formatAiringTime(data.value) }}
-              </template>
-              <template #cell(holiday)="data">
-                {{ holidayName(data.item) }}
-              </template>
-            </b-table>
-          </b-card>
-        </b-col>
-      </b-row>
+      <b-card class="mt-3" no-body>
+        <b-tabs card>
+          <b-tab title="Halloween">
+            <iframe
+              :src="halloweenCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
+              style="border: 0"
+              width="100%"
+              height="800"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+          </b-tab>
+          <b-tab title="Christmas" active>
+            <iframe
+              :src="christmasCalendarEmbed"
+              :class="{ 'calendar-embed--dark': isDarkMode }"
+              style="border: 0"
+              width="100%"
+              height="800"
+              frameborder="0"
+              scrolling="no"
+            ></iframe>
+          </b-tab>
+        </b-tabs>
+      </b-card>
     </b-container>
 
     <Footer></Footer>

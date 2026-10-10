@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/Home.vue";
-import CalendarsView from "../views/Calendars.vue";
+import CatalogView from "../views/Catalog.vue";
 
 Vue.use(VueRouter);
 
@@ -12,9 +12,9 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/calendars",
-    name: "calendars",
-    component: CalendarsView,
+    path: "/catalog",
+    name: "catalog",
+    component: CatalogView,
   },
 ];
 

@@ -11,7 +11,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav class="me-auto">
-          <b-nav-item to="/calendars">Calendars</b-nav-item>
+          <b-nav-item to="/catalog">Catalog</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ms-auto">
