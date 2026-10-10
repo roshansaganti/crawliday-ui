@@ -39,15 +39,33 @@
 
             <hr> -->
 
+            <!-- Top spacing -->
+            <div class="mt-3"></div>
+
+            <!-- Google login button -->
             <b-button
               variant="light"
               size="md"
-              class="github-login-button my-3"
+              class="google-login-button mb-2"
+              @click="startGoogleLogin"
+            >
+              <font-awesome-icon :icon="['fab', 'google']" class="mr-2" />
+              Continue with Google
+            </b-button>
+
+            <!-- GitHub login button -->
+            <b-button
+              variant="light"
+              size="md"
+              class="github-login-button mb-2"
               @click="startGithubLogin"
             >
               <font-awesome-icon :icon="['fab', 'github']" class="mr-2" />
               Continue with GitHub
             </b-button>
+
+            <!-- Bottom spacing -->
+            <div class="mb-2"></div>
           </b-card>
         </b-col>
       </b-row>
@@ -79,6 +97,13 @@ export default {
       const normalizedBaseUrl = apiBaseUrl.replace(/\/+$/, "");
 
       window.location.assign(`${normalizedBaseUrl}/oauth/login/github/`);
+    },
+    startGoogleLogin() {
+      const apiBaseUrl =
+        process.env.VUE_APP_API_BASE_URL || window.location.origin;
+      const normalizedBaseUrl = apiBaseUrl.replace(/\/+$/, "");
+
+      window.location.assign(`${normalizedBaseUrl}/oauth/login/google/`);
     },
   },
 };
