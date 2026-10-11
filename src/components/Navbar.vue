@@ -5,24 +5,53 @@
     :variant="isDarkMode ? 'dark' : 'light'"
   >
     <b-container>
-      <b-navbar-brand href="#">Crawliday</b-navbar-brand>
+      <b-navbar-brand to="/">Crawliday</b-navbar-brand>
 
-      <b-navbar-nav class="ml-auto">
-        <a
-          class="btn theme-toggle"
-          size="sm"
-          :variant="isDarkMode ? 'secondary' : 'dark'"
-          @click="toggleDarkMode"
-          :title="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-          :aria-label="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
-        >
-          <font-awesome-icon :icon="['fas', isDarkMode ? 'sun' : 'moon']" size="lg" />
-        </a>
-      </b-navbar-nav>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
-      <!-- <b-navbar-toggle target="nav-collapse"></b-navbar-toggle> -->
+      <b-collapse id="nav-collapse" is-nav>
+        <!-- Left-aligned navigation items -->
+        <b-navbar-nav class="me-auto">
+          <b-nav-item to="/catalog">Catalog</b-nav-item>
+        </b-navbar-nav>
 
-      <!-- <b-collapse id="nav-collapse" is-nav></b-collapse> -->
+        <!-- Right-aligned navigation items -->
+        <b-navbar-nav class="ms-auto">
+          <!-- Theme toggle button -->
+          <a
+            class="btn theme-toggle"
+            size="sm"
+            :variant="isDarkMode ? 'secondary' : 'dark'"
+            @click="toggleDarkMode"
+            :title="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'"
+            :aria-label="
+              isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'
+            "
+          >
+            <font-awesome-icon
+              :icon="['fas', isDarkMode ? 'sun' : 'moon']"
+              size="lg"
+            />
+          </a>
+
+          <!-- User authentication dropdown -->
+          <b-nav-item-dropdown right v-if="isAuthenticated">
+            <!-- Using 'button-content' slot -->
+            <template #button-content>
+              {{ userName }}
+            </template>
+            <!-- <b-dropdown-item href="#" class="theme-toggle">Profile</b-dropdown-item> -->
+            <b-dropdown-item @click="logout" class="theme-toggle"
+              >Logout</b-dropdown-item
+            >
+          </b-nav-item-dropdown>
+
+          <!-- Login link for unauthenticated users -->
+          <b-navbar-nav v-else>
+            <b-nav-item to="/login">Login</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-nav>
+      </b-collapse>
     </b-container>
   </b-navbar>
 </template>
@@ -33,10 +62,27 @@ export default {
     isDarkMode() {
       return this.$store.getters.isDarkMode;
     },
+    isAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
+    userName() {
+      const user = this.$store.state.user;
+      return user ? user.username || user.name || user.login || "Account" : "";
+    },
+  },
+  created() {
+    this.$store.dispatch("checkAuthentication");
   },
   methods: {
     toggleDarkMode() {
       this.$store.commit("TOGGLE_DARK_MODE");
+    },
+    async logout() {
+      try {
+        await this.$store.dispatch("logout");
+      } catch (error) {
+        console.error("Unable to log out", error);
+      }
     },
   },
 };
